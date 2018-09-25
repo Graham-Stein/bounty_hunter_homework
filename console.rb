@@ -27,3 +27,13 @@ mark3 = BountyHunter.new({
   mark1.save()
   mark2.save()
   mark3.save()
+
+
+  mark1.danger = 4
+  mark1.update()
+
+  marks = BountyHunter.all()
+  puts marks[0].name
+  puts marks[0].id
+  puts marks[0].species
+  puts marks[0].danger
