@@ -37,3 +37,7 @@ mark3 = BountyHunter.new({
   puts marks[0].id
   puts marks[0].species
   puts marks[0].danger
+
+  found = BountyHunter.find(141)
+  puts "#{found} is the found item"
+  puts found.each { |attribute| puts attribute.to_s}

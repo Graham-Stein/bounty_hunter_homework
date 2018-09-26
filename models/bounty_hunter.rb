@@ -15,6 +15,32 @@ class BountyHunter
     @homeworld = details['homeworld']
   end
 
+  def self.find(input_id)
+  #   # Implement a `self.find` method that
+  #   # returns one instance of your class when
+  #   # an id is passed in.
+    db = PG.connect({
+      dbname: 'bounty_hunters',
+      host: 'localhost'
+    })
+
+    # binding.pry
+    sql = "
+    SELECT * FROM bounty_hunters
+    WHERE id = '#{input_id}';
+    "
+    # binding.pry
+    db.prepare('id_search', sql)
+    # binding.pry
+    mark_hashes = db.exec_prepared('id_search')
+    db.close()
+    # binding.pry
+    mark_objects = mark_hashes.map do |mark_hash|
+      BountyHunter.new(mark_hash)
+    end
+    return mark_objects
+  end
+
   def update()
       db = PG.connect({
         dbname: 'bounty_hunters',
